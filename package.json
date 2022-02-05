@@ -1,0 +1,31 @@
+{
+  "name": "hl7js",
+  "version": "0.0.1",
+  "description": "hl7 message standard utility",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RishabhAroraa/hl7-js.git"
+  },
+  "keywords": [
+    "hl7"
+  ],
+  "author": "rishabharora.ns@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RishabhAroraa/hl7-js/issues"
+  },
+  "homepage": "https://github.com/RishabhAroraa/hl7-js#readme",
+  "devDependencies": {
+    "jest": "^27.5.0"
+  },
+  "dependencies": {
+    "webpack": "^5.68.0"
+  }
+}
