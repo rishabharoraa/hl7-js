@@ -1,16 +1,20 @@
-import { ShallowSegmentArray, DeepSegmentArray, ParseDepth, SubSegmentArray } from "../types/hl7Message"
+import { SkeletalParseDigest } from "./types/hl7Message";
+import { depthSeparators } from "./depthSeparators";
 
-const getSubSegments = (segment: string): SubSegmentArray => segment.split("|")
+const skeletalParse = (
+  hl7Message: string,
+  depth: number
+): SkeletalParseDigest =>
+  parseMessage(hl7Message, depthSeparators.slice(0, depth));
 
-// does a skeletal parse - divides the message into segments and subgements
-const skeletalParse = (hl7Message: string, depth: ParseDepth = 1): ShallowSegmentArray | DeepSegmentArray => {
-
-    // split by newline
-    let segments: ShallowSegmentArray = hl7Message.split(/\r\n|\r|\n/);
-
-    if(depth === 1) return segments;
-    // split by subsegment separator '|'
-    else if(depth === 2) return segments.map(segment => getSubSegments(segment));
-}
+const parseMessage = (
+  segment: string,
+  depthSeparators: RegExp[]
+): SkeletalParseDigest => {
+  if (!depthSeparators.length) return segment;
+  return segment
+    .split(depthSeparators[0])
+    .map((subSegment) => parseMessage(subSegment, depthSeparators.slice(1)));
+};
 
 export default skeletalParse;
